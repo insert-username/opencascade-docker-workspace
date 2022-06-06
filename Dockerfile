@@ -29,16 +29,11 @@ RUN wget https://www.vtk.org/files/release/9.1/VTK-9.1.0.tar.gz
 RUN tar -xf VTK-9.1.0.tar.gz
 
 
-
-
-
 #build vtk
-
-# old command I used
-# cmake .. -GNinja -DVTK_GROUP_ENABLE_Imaging=WANT -DVTK_GROUP_ENABLE_MPI=WANT -DVTK_GROUP_ENABLE_Qt=WANT -DVTK_GROUP_ENABLE_Rendering=WANT -DVTK_GROUP_ENABLE_StandAlone=WANT -DVTK_GROUP_ENABLE_Views=WANT -DVTK_GROUP_ENABLE_Web=WANT
-
 WORKDIR VTK-9.1.0
 RUN apt-get install build-essential mesa-common-dev mesa-utils freeglut3-dev ninja-build -y
+
+# patch needed to fix: https://discourse.vtk.org/t/building-opencascade-7-5-0-with-vtk-9-0-1/4673/9
 COPY vtk-patch.patch /vtk-patch.patch
 RUN patch -i ../vtk-patch.patch -p1
 RUN mkdir build
