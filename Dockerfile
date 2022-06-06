@@ -67,5 +67,3 @@ RUN cmake .. -GNinja -DCMAKE_BUILD_TYPE="Release"
 RUN ninja -j 5
 RUN ninja install
 
-CMD echo "hello world"
-
